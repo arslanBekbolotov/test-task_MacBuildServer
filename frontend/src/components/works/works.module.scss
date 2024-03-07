@@ -1,0 +1,50 @@
+.works{
+  margin-bottom: 134px;
+}
+
+.work{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 15px;
+  margin-bottom: 31px;
+  cursor: pointer;
+
+  img{
+    max-width: 246px;
+    height: auto;
+    margin-right: 18px;
+    border-radius: 6px;
+  }
+
+  h5{
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  &_info{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 22px;
+
+    .work_publication_year{
+      background: #142850;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 0 10px;
+      line-height: 25px;
+      margin-right: 26px;
+      color: #fff;
+    }
+
+    .work_type{
+      font-size: 20px;
+      color: var(--light);
+    }
+  }
+
+}

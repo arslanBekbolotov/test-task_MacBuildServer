@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { IAuth } from "@/types";
 import { login, register } from "@/redux/features/user/usersThunk";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Alert from "@/components/Alert/Alert";
+import Alert from "@/components/alert/Alert";
 
 const initialState = {
   email: "",

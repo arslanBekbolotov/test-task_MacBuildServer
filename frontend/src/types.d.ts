@@ -23,3 +23,18 @@ export interface ValidationError {
   name: string;
   _message: string;
 }
+
+export interface IPost {
+  title: string;
+  publicationDate: string;
+  topic: string;
+  description: string;
+}
+
+export interface IWork {
+  title: string;
+  image: string;
+  publicationYear: string;
+  type: string;
+  description: string;
+}

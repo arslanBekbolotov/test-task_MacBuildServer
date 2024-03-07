@@ -1,0 +1,22 @@
+.navigation{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 27px 15px;
+  gap:33px;
+  margin-bottom: 120px;
+
+  &_item{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: right;
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+.wrapper{
+  background: #edf7fa;
+}
+

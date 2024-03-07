@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
 import ReduxProvider from "@/redux/provider";
 import "./styles/globals.scss";
+import React from "react";
 
 const heebo = Heebo({
   subsets: ["latin"],

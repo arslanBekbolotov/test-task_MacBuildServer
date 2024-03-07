@@ -2,7 +2,7 @@ import AuthForm from "@/components/authForm/AuthForm";
 
 const Page = () => {
   return (
-    <div>
+    <div className="container">
       <AuthForm />
     </div>
   );
