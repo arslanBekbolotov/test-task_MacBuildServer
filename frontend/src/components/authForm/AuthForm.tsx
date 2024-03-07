@@ -1,5 +1,5 @@
 "use client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import styles from "./authForm.module.scss";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -15,6 +15,7 @@ const initialState = {
 
 const AuthForm = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { loginError, registerError, authLoading } = useAppSelector(
     (state) => state.usersStore,
@@ -79,7 +80,7 @@ const AuthForm = () => {
           await dispatch(register(state)).unwrap();
         }
 
-        setTimeout(() => redirect("/"), 2000);
+        router.push("/");
       } catch {
         //nothing
       }
@@ -96,7 +97,9 @@ const AuthForm = () => {
 
   return (
     <div className={styles.form_container}>
-      {loginError && <Alert message={loginError.error + ". Try again"} />}
+      {loginError && (
+        <Alert bgColor={"#ec2a2a"} message={loginError.error + ". Try again"} />
+      )}
 
       <form onSubmit={submitFormHandler}>
         <h3 className={styles.form_title}>
