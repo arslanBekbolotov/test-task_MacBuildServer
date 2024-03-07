@@ -1,26 +1,14 @@
 import express from 'express';
-import {Error} from 'mongoose';
 import {User} from '../models/User';
-import config from '../config';
-import {OAuth2Client} from 'google-auth-library';
-import crypto from 'crypto';
-import {imagesUpload} from '../multer';
-import {cloudinaryImageUploadMethod} from '../controller/uploader';
+import {Error} from 'mongoose';
 
 const usersRouter = express.Router();
-const client = new OAuth2Client(config.google.clientId);
 
-usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
+usersRouter.post('/', async (req, res, next) => {
   try {
-    let avatar = null;
-
-    if (req.file?.path) avatar = await cloudinaryImageUploadMethod(req.file?.path);
-
     const user = new User({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
-      displayName: req.body.displayName,
-      avatar,
     });
 
     user.generateToken();
@@ -32,22 +20,22 @@ usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
       return res.status(400).send(error);
     }
 
-    return next(error);
+    next(error);
   }
 });
 
 usersRouter.post('/sessions', async (req, res, next) => {
   try {
-    const user = await User.findOne({username: req.body.username});
+    const user = await User.findOne({email: req.body.email});
 
     if (!user) {
-      return res.status(400).send({error: 'Wrong password or username!!!'});
+      return res.status(400).send({error: 'Wrong password or email!!!'});
     }
 
     const isMatch = await user.checkPassword(req.body.password);
 
     if (!isMatch) {
-      return res.status(400).send({error: 'Wrong password or username!'});
+      return res.status(400).send({error: 'Wrong password or email!'});
     }
 
     user.generateToken();
@@ -59,70 +47,6 @@ usersRouter.post('/sessions', async (req, res, next) => {
     });
   } catch (e) {
     next(e);
-  }
-});
-
-usersRouter.post('/google', async (req, res, next) => {
-  try {
-    const ticket = await client.verifyIdToken({
-      idToken: req.body.credential,
-      audience: config.google.clientId,
-    });
-
-    const payload = ticket.getPayload();
-
-    if (!payload) {
-      return res.status(400).send({error: 'Google login error!'});
-    }
-
-    const email = payload['email'];
-    const id = payload['sub'];
-    const displayName = payload['name'];
-    const avatar = payload['picture'];
-
-    if (!email) {
-      return res.status(400).send({error: 'Not enough user data to continue'});
-    }
-
-    let user = await User.findOne({googleID: id});
-
-    if (!user) {
-      user = new User({
-        username: email,
-        password: crypto.randomUUID(),
-        googleID: id,
-        avatar,
-        displayName,
-      });
-    }
-
-    user.generateToken();
-
-    await user.save();
-
-    return res.send({message: 'Login with Google successful!', user});
-  } catch (e) {
-    return next(e);
-  }
-});
-
-usersRouter.delete('/sessions', async (req, res, next) => {
-  try {
-    const token = req.get('Authorization');
-    const success = {message: 'Success'};
-    if (!token) {
-      return res.status(204).send(success);
-    }
-    const user = await User.findOne({token});
-
-    if (!user) return res.status(204).send(success);
-
-    user.generateToken();
-    await user.save();
-
-    return res.status(204).send(success);
-  } catch (e) {
-    return next(e);
   }
 });
 

@@ -13,21 +13,20 @@ type UserModel = Model<IUser, NonNullable<unknown>, IUserMethods>;
 const SALT_WORK_FACTOR = 7;
 
 const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
     validate: {
       validator: async function (this: HydratedDocument<IUser>, value: string) {
-        if (!this.isModified('username')) return true;
-        const user = await User.findOne({username: value});
+        if (!this.isModified('email')) return true;
+        const user = await User.findOne({email: value});
         if (user) return false;
       },
       message: 'This user is already registered',
     },
   },
   displayName: String,
-  avatar: String,
   role: {
     type: String,
     required: true,
@@ -42,7 +41,6 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
-  googleID: String,
 });
 
 UserSchema.pre('save', async function (next) {
