@@ -6,7 +6,7 @@ import styles from "./about.module.scss";
 const About = () => {
   return (
     <div className={`${styles.about_john} section`}>
-      <div>
+      <div className={styles.about_info}>
         <h3>Hi, I am John, Creative Technologist</h3>
         <p>
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet

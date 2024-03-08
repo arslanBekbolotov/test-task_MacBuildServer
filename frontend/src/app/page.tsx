@@ -4,19 +4,14 @@ import { axiosApi } from "../../axiosApi";
 import Works from "@/components/works/Works";
 import Footer from "@/components/footer/Footer";
 import About from "@/components/about/About";
+import Navigation from "@/components/navigation/Navigation";
 
 const Home = async () => {
-  const pages = ["Works", "Blog", "Contacts"];
   const data = await getData();
 
   return (
     <div className={styles.home_page}>
-      <ul className={`${styles.navigation} container`}>
-        {pages.map((page) => (
-          <li className={styles.navigation_item}>{page}</li>
-        ))}
-      </ul>
-
+      <Navigation />
       <div className={styles.main_content}>
         <section>
           <About />

@@ -1,3 +1,5 @@
+@import "../../app/styles/mixins";
+
 .works{
   margin-bottom: 134px;
 }
@@ -11,17 +13,31 @@
   margin-bottom: 31px;
   cursor: pointer;
 
+  @include sm(){
+    flex-wrap: wrap;
+  }
+
   img{
     max-width: 246px;
     height: auto;
     margin-right: 18px;
     border-radius: 6px;
+
+    @include sm(){
+      max-width: 100%;
+      margin:0 0 20px;
+    }
   }
 
   h5{
     font-weight: 700;
     font-size: 30px;
     margin-bottom: 20px;
+
+    @include md(){
+      font-size: 24px;
+      line-height: 125%;
+    }
   }
 
   &_info{

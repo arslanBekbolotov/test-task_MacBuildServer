@@ -1,19 +1,38 @@
+@import "../../app/styles/mixins";
+
 .about_john{
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   margin-bottom:71px;
   gap: 110px;
+
+  @include md(){
+    flex-wrap: wrap-reverse;
+    gap: 34px;
+    text-align: center;
+    margin-bottom: 59px;
+  }
 
   h3{
     font-weight: 700;
     font-size: 44px;
     line-height: 136%;
     margin: 18px 0 40px;
+
+    @include sm(){
+      font-size: 32px;
+      line-height: 125%;
+      margin:0  0 21px;
+    }
   }
 
   p{
     margin-bottom: 38px;
+
+    @include sm(){
+      margin-bottom: 27px;
+    }
   }
 
   button{
@@ -31,5 +50,10 @@
     max-width: 248px;
     height: auto;
     min-width: 200px;
+
+    @include md(){
+      display: block;
+      margin: 0 auto;
+    }
   }
 }

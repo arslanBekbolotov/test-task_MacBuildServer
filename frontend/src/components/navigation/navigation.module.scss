@@ -1,0 +1,48 @@
+@import "../../app/styles/mixins";
+
+.burger_menu {
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  display: none;
+  cursor: pointer;
+
+  @include sm() {
+    display: block;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 27px 15px;
+  gap: 33px;
+  margin-bottom: 120px;
+  transition: all 300ms ease-in;
+
+  @include sm() {
+    margin-bottom: 33px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    flex-direction: column;
+  }
+
+  &_item {
+    font-weight: 500;
+    font-size: 20px;
+    text-align: right;
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+.navigation.open {
+  opacity: 1;
+  max-height: 500px; // Adjust the max-height as needed
+  pointer-events: auto;
+}
