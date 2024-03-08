@@ -17,8 +17,9 @@ const Footer = () => {
   return (
     <div className={`${styles.footer} section`}>
       <div className={styles.footer_icons}>
-        {icons.map((icon) => (
+        {icons.map((icon, index) => (
           <Image
+            key={index}
             src={icon.path.src}
             alt={icon.name}
             width={30}

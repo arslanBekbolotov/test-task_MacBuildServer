@@ -15,8 +15,8 @@ const Posts: React.FC<Props> = ({ posts }) => {
         <span>View all</span>
       </div>
       <div className={styles.posts_body}>
-        {posts.map((post) => (
-          <PostsItem post={post} />
+        {posts.map((post, index) => (
+          <PostsItem key={index} post={post} />
         ))}
       </div>
     </div>

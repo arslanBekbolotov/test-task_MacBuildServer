@@ -1,6 +1,5 @@
 import express from 'express';
 import {Post} from '../models/Posts';
-import usersRouter from './users';
 
 const postsRouter = express.Router();
 

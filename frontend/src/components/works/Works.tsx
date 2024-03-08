@@ -14,8 +14,8 @@ const Works: React.FC<Props> = ({ works }) => {
         Featured works
       </h6>
       <div className={styles.works_lists}>
-        {works.map((work) => (
-          <WorksItem work={work} />
+        {works.map((work, index) => (
+          <WorksItem key={index} work={work} />
         ))}
       </div>
     </div>
